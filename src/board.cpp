@@ -1,6 +1,5 @@
 #include "board.hpp"
 #include <algorithm>
-#include <ranges>
 
 Cell &Cell::operator+=(const Movement &movement)
 {

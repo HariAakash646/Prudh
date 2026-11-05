@@ -147,7 +147,8 @@ std::optional<int> Board::make_move(Move move)
         return std::nullopt;
 
     Cell cell = move.cell;
-    int piece_count = board[cell.row][cell.col];
+    const int original_piece_count = board[cell.row][cell.col];
+    int piece_count = original_piece_count;
     board[cell.row][cell.col] = 0;
 
     Movement movement = movements[move.dir];
@@ -168,7 +169,7 @@ std::optional<int> Board::make_move(Move move)
     else
     {
         int captured = 0;
-        while (true)
+        while (piece_count)
         {
             cell += movement;
             if (!is_bounded(cell))
@@ -177,7 +178,7 @@ std::optional<int> Board::make_move(Move move)
                 break;
             }
             --piece_count;
-            if (board[cell.row][cell.col] > 0 && board[cell.row][cell.col] < board[move.cell.row][move.cell.col])
+            if (board[cell.row][cell.col] > 0 && board[cell.row][cell.col] < original_piece_count)
             {
                 captured += 1 + board[cell.row][cell.col];
                 board[cell.row][cell.col] = 0;
@@ -187,7 +188,7 @@ std::optional<int> Board::make_move(Move move)
                 ++board[cell.row][cell.col];
             }
             cell += movement;
-            if (!is_bounded(cell))
+            if (!is_bounded(cell) || piece_count == 0)
             {
                 board[move.cell.row][move.cell.col] += piece_count;
                 break;

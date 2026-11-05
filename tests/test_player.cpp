@@ -10,10 +10,10 @@ TEST_CASE("Player starts with zero score")
 TEST_CASE("update_score adds to the score")
 {
     Player p;
-    p.update_score(3);
+    p.increment_score(3);
     CHECK(p.get_score() == 3);
-    p.update_score(4);
+    p.increment_score(4);
     CHECK(p.get_score() == 7);
-    p.update_score(0);
+    p.increment_score(0);
     CHECK(p.get_score() == 7);
 }

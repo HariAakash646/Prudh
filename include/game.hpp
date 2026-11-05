@@ -19,6 +19,6 @@ private:
     Board board;
     std::array<Player, 2> players;
 
-    Turn turn;
-    bool completed;
+    Turn turn = Player1;
+    bool completed = false;
 };

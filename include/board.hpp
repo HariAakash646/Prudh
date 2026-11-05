@@ -59,6 +59,8 @@ public:
     std::vector<Move> get_valid_moves(Turn turn);
     bool move_available(Turn turn);
 
+    int get_tallest_cell_value(Turn turn);
+
 private:
     std::array<std::array<int, board_size>, board_size> board;
 

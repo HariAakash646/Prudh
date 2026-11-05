@@ -201,3 +201,15 @@ std::optional<int> Board::make_move(Move move)
         return captured;
     }
 }
+
+int Board::get_tallest_cell_value(Turn turn) {
+    int tallest_cell_value = 0;
+    for (int row = 0; row < board_size; row++)
+    {
+        for (int col = (turn + row) % 2; col < board_size; col += 2)
+        {
+            tallest_cell_value = std::max(tallest_cell_value, board[row][col]);
+        }
+    }
+    return tallest_cell_value;
+}

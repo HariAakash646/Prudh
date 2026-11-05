@@ -402,3 +402,41 @@ TEST_CASE("Cell += Movement shifts the cell")
     CHECK(c.row == 2);
     CHECK(c.col == 2);
 }
+
+// ---------------------------------------------------------------- tallest stack
+
+TEST_CASE("get_tallest_cell_value: initial board is 1 for both players")
+{
+    Board b;
+    CHECK(b.get_tallest_cell_value(Player1) == 1);
+    CHECK(b.get_tallest_cell_value(Player2) == 1);
+}
+
+TEST_CASE("get_tallest_cell_value only looks at the player's own squares")
+{
+    Grid g = empty_grid();
+    g[0][0] = 3; // P1
+    g[4][2] = 5; // P1 (tallest for P1)
+    g[0][1] = 9; // P2 (taller, but not P1's)
+    g[3][2] = 2; // P2
+    Board b(g);
+    CHECK(b.get_tallest_cell_value(Player1) == 5);
+    CHECK(b.get_tallest_cell_value(Player2) == 9);
+}
+
+TEST_CASE("get_tallest_cell_value is 0 when the player has no pieces")
+{
+    Grid g = empty_grid();
+    g[0][1] = 4; // only P2 has pieces
+    Board b(g);
+    CHECK(b.get_tallest_cell_value(Player1) == 0);
+    CHECK(b.get_tallest_cell_value(Player2) == 4);
+}
+
+TEST_CASE("get_tallest_cell_value updates after a move")
+{
+    Board b;
+    REQUIRE(b.make_move({{0, 0}, SE}).has_value()); // (1,1) becomes 2
+    CHECK(b.get_tallest_cell_value(Player1) == 2);
+    CHECK(b.get_tallest_cell_value(Player2) == 1);
+}

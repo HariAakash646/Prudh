@@ -17,18 +17,29 @@ enum Direction
     NW
 };
 
+constexpr auto Run = std::array{Direction::N, Direction::E, Direction::S, Direction::W};
+constexpr auto Slide = std::array{Direction::NE, Direction::SE, Direction::SW, Direction::NW};
+
 enum Turn
 {
     Player1,
     Player2
 };
 
-struct Cell {
-    int row;
-    char col;
+struct Movement
+{
+    int row, col;
 };
 
-struct Move {
+struct Cell
+{
+    int row, col;
+
+    Cell &operator+=(const Movement &movement);
+};
+
+struct Move
+{
     Cell cell;
     Direction dir;
 };
@@ -47,6 +58,9 @@ public:
 private:
     std::array<std::array<int, board_size>, board_size> board;
 
+    bool is_bounded(const Cell &cell);
+    bool is_valid(const Move &move);
     std::vector<Move> get_cell_moves(Cell cell);
 
+    const std::array<Movement, 8> movements = {{{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}}};
 };

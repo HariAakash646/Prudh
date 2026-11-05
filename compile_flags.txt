@@ -1,4 +1,6 @@
+-xc++
 -std=c++23
 -Iinclude
+-Itests/vendor
 -Wall
 -Wextra

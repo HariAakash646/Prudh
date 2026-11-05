@@ -1,9 +1,11 @@
 #include "player.hpp"
 
-Player::Player() {
+Player::Player()
+{
     score = 0;
 }
 
-void Player::update_score(int value) {
+void Player::update_score(int value)
+{
     score += value;
 }

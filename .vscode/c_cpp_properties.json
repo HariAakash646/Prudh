@@ -4,10 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/tests/vendor"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/g++",
+            "compilerPath": "/usr/bin/g++-13",
             "cStandard": "gnu17",
             "cppStandard": "c++23",
             "intelliSenseMode": "linux-gcc-x64"

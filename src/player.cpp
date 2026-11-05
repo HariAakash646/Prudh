@@ -9,3 +9,7 @@ void Player::update_score(int value)
 {
     score += value;
 }
+
+int Player::get_score() {
+    return score;
+}

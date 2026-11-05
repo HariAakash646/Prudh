@@ -1,6 +1,6 @@
 # ---- Config ----
 TARGET   := app
-CXX      := g++-13
+CXX      := g++-15
 CXXFLAGS := -std=c++23 -Wall -Wextra -Iinclude -MMD -MP
 LDFLAGS  :=
 LDLIBS   :=
